@@ -15,6 +15,17 @@ posts = Post.all
   )
 end
 
+Post.find_or_create_by!(
+  title: "Unique Title", body: "This post should be added only once. This is for checkpoint 30."
+)
+
+unique_post = Post.find 51
+
+Comment.find_or_create_by!(
+  post: unique_post,
+  body: "This comment belongs to the unique post. This is for assignment 30."
+)
+
 puts "Seed finished"
 puts "#{Post.count} posts created"
 puts "#{Comment.count} comments created"
