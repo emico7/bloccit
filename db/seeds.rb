@@ -15,11 +15,9 @@ posts = Post.all
   )
 end
 
-Post.find_or_create_by!(
+unique_post = Post.find_or_create_by!(
   title: "Unique Title", body: "This post should be added only once. This is for checkpoint 30."
 )
-
-unique_post = Post.find 51
 
 Comment.find_or_create_by!(
   post: unique_post,
