@@ -1,0 +1,30 @@
+<div class="row">
+  <div class="col-md-4">
+    <p>Guidelines for advertisements</p>
+    <ul>
+      <li>Make sure it's good deal.</li>
+      <li>Please no false advertisements.</li>
+      <li>Make it fun.</li>
+    </ul>
+  </div>
+
+  <div class="col-md-8">
+    <%= form_for @advertisement do |ad| %>
+      <div class="form-group">
+        <%= ad.label :title %>
+        <%= ad.text_field :title, class: 'form-control', placeholder: "Enter ad title here" %>
+      </div>
+      <div class="form-group">
+        <%= ad.label :price %>
+        <%= ad.text_field :price, class: 'form-control', placeholder: "Enter price here (ex) $5 => enter 5" %>
+      </div>
+      <div class="form-group">
+        <%= ad.label :body %>
+        <%= ad.text_area :body, rows: 8, class: 'form-control', placeholder: "Enter ad body here" %>
+      </div>
+      <div class="form-group">
+        <%= ad.submit "Save", class: 'btn btn-success' %>
+      </div>
+  <% end %>
+  </div>
+</div>
