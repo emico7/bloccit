@@ -1,0 +1,29 @@
+<h1>Edit Question</h1>
+
+<div class="row">
+  <div class="col-md-4">
+    <p>Guidelines for questions</p>
+    <ul>
+      <li>Make sure it's relevant to Ruby.</li>
+      <li>Make it short and concise.</li>
+      <li>Don't forget to thank the person who help solve your question.</li>
+    </ul>
+  </div>
+  <div class="col-md-8">
+    <%= form_for @question do |q| %>
+      <div class="form-group">
+        <%= q.label :title %>
+        <%= q.text_field :title, class: 'form-control', placeholder: "Enter question title here" %>
+      </div>
+
+      <div class="form-group">
+        <%= q.label :body %>
+        <%= q.text_area :body, rows: 8, class: 'form-control', placeholder: "Enter question body here" %>
+      </div>
+
+      <div class="form-group">
+        <%= q.submit "Save", class: 'btn btn-success' %>
+      </div>
+    <% end %>
+  </div>
+</div>
