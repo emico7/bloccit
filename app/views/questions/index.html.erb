@@ -1,5 +1,14 @@
 <h1>All Questions</h1>
 
 <% @questions.each do |question| %>
-  <p><%= link_to question.title, question %></p>
+  <div class="media">
+    <div class="media-body">
+      <h4 class="media-heading">
+        <%= link_to question.title, question %>
+        <% if question.resolved? %>
+        <font color="red">resolved!</font>
+        <% end %>
+      </h4>
+    </div>
+  </div>
 <% end %>

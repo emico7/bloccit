@@ -22,6 +22,11 @@
       </div>
 
       <div class="form-group">
+        <%= q.label :resolved %>
+        <%= q.check_box :resolved %>
+      </div>
+
+      <div class="form-group">
         <%= q.submit "Save", class: 'btn btn-success' %>
       </div>
     <% end %>
