@@ -4,6 +4,9 @@
   <div class="col-md-8">
     <p><%= @sponsored_post.body %></p>
   </div>
+  <div class="row">
+    <p><font size=5px><%= "$#{@sponsored_post.price}" %></font></p>
+  </div>
   <div class="col-md-4">
 
     <%= link_to "Edit", edit_topic_sponsored_post_path(@sponsored_post.topic, @sponsored_post), class: 'btn btn-success' %>
