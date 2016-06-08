@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
 
   validates :email,
              presence: true,
-             uniquness: { case_sensitive: false },
+             uniqueness: { case_sensitive: false },
              length: { minimum: 3, maximum: 254 }
 
   has_secure_password
