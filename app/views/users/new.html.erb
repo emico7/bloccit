@@ -34,10 +34,14 @@
         <%= f.label :password_confirmation %>
         <%= f.password_field :password_confirmation, class: 'form-control', placeholder: "Enter password confirmation" %>
       <% end %>
+
       <div class="form-group">
         <%= f.submit "Sign up", class: 'btn btn-success' %>
       </div>
-    <% end %>
+  <% end %>
+
+  <%= form_for @user, :url => { :action => :confirm } do |f| %>
+  <% end %>
 
   </div>
 </div>
