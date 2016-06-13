@@ -17,7 +17,17 @@
 @import "bootstrap";
 
 .user-info {
-  margin-top: 9px;
+  margin-top: 2px;
+}
+
+.user-info img {
+
+  float: right;
+}
+
+.user-link {
+  padding: 3px;
+  float: right;
 }
 
 .nav {
