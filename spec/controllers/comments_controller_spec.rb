@@ -7,6 +7,8 @@ RSpec.describe CommentsController, type: :controller do
   let(:my_topic) { Topic.create!(name: RandomData.random_sentence, description: RandomData.random_paragraph) }
   let(:my_post) { my_topic.posts.create!(title: RandomData.random_sentence, body: RandomData.random_paragraph, user: my_user) }
   let(:my_comment) { Comment.create!(body: 'Comment Body', post: my_post, user: my_user) }
+  let(:my_comment2) { Comment.create!(body: 'Comment Body', topic: my_topic, user: my_user) }
+
 
 
   context "guest" do
@@ -109,5 +111,43 @@ RSpec.describe CommentsController, type: :controller do
       end
     end
   end
+
+
+
+  context "admin user doing CRUD on a comment for Topic they don't own" do
+    before do
+      other_user.admin!
+      create_session(other_user)
+    end
+
+    describe "POST create" do
+      it "increases the number of comments by 1" do
+        expect { post :create, topic_id: my_topic.id, comment: {body: RandomData.random_paragraph} }.to change(Comment,:count).by(1)
+      end
+
+      it "redirects to the topic show view" do
+        post :create, topic_id: my_topic.id, comment: {body: RandomData.random_paragraph}
+        expect(response).to redirect_to [my_topic]
+      end
+    end
+
+    describe "DELETE destroy" do
+      it "deletes the comment" do
+        delete :destroy, topic_id: my_topic.id, id: my_comment2.id
+        count = Comment.where({id: my_comment2.id}).count
+        expect(count).to eq(0)
+      end
+
+      it "redirects to the topic show view" do
+        delete :destroy, topic_id: my_topic.id, id: my_comment2.id
+        expect(response).to redirect_to [my_topic]
+      end
+    end
+  end
+
+
+
+
+
 
 end
