@@ -16,11 +16,13 @@
 
       <div>
         <h3>Comments</h3>
-        <%= render partial: "comment", object: @new_comment %>
+        <% @topic.comments.each do |comment| %>
+          <%= render partial: 'comments/comment', locals: { parent: @topic, comment: comment }%>
+        <% end %>
       </div>
 
       <% if current_user %>
-        <%= render partial: 'comments/form', object: @new_comment %>
+        <%= render 'comments/form_topic', comment: Comment.new, topic: @topic %>
       <% end %>
 
 
