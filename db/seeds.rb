@@ -43,13 +43,7 @@ end
     body: RandomData.random_paragraph
   )
 end
-
-10.times do
-  Label.create!(
-    topic: topics.sample(3),
-    name: RandomData.random_word
-  )
-end
+comments = Comment.all
 
 admin = User.create!(
   name: 'Admin User',
@@ -69,4 +63,3 @@ puts "#{User.count} users created"
 puts "#{Topic.count} topics created"
 puts "#{Post.count} posts created"
 puts "#{Comment.count} comments created"
-puts "#{Label.count} labels created"

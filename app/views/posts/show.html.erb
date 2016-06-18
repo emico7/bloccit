@@ -23,7 +23,7 @@
     </div>
 
     <% if current_user %>
-      <%= render 'comments/form', comment: Comment.new, post: @post %>
+      <%= render 'comments/form', comment: Comment.new, parent: @post %>
     <% end %>
   </div>
 
