@@ -1,4 +1,5 @@
 class Post < ActiveRecord::Base
+  after_create :create_vote
 
   belongs_to :topic
   belongs_to :user
@@ -32,4 +33,13 @@ class Post < ActiveRecord::Base
     new_rank = points + age_in_days
     update_attribute(:rank, new_rank)
   end
+
+  private
+
+  def create_vote
+
+    @vote = user.votes.create(value: 1)
+    @vote.user = self.user
+  end
+
 end
