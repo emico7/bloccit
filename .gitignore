@@ -54,3 +54,6 @@ build/
 # unless supporting rvm < 1.11.0 or doing something fancy, ignore this:
 .rvmrc
 >>>>>>> a57e44c7d9e9726eeb6d2d3d84d6e83b81b6af34
+
+# Ignore application configuration
+/config/application.yml
