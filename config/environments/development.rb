@@ -41,5 +41,4 @@ Rails.application.configure do
 
   config.action_mailer.default_url_options = { host: 'localhost' }
 
-  config.raise_delivery_errors = true
 end
