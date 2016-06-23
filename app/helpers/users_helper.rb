@@ -1,9 +1,9 @@
 module UsersHelper
-  def user_has_any_post(user)
-    user.posts.count > 0
+  def user_has_any_posts_comments(user)
+    user.posts.any? || user.comments.any?
   end
 
-  def user_has_any_comment(user)
-    user.comments.count > 0
+  def user_has_any_favorites(user)
+    user.favorites.any?
   end
 end

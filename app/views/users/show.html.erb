@@ -39,16 +39,15 @@
     </div>
 </div>
 
-<% if user_has_any_post(@user) == true %>
-<h2>Posts</h2>
-<%= render @user.posts %>
+<% if user_has_any_posts_comments?(@user) %>
+  <h2>Posts</h2>
+  <%= render @user.posts %>
+  <h2>Comments</h2>
+  <%= render @user.comments %>
 <% else %>
-<h4><%= "#{@user.name} has not submitted any posts yet." %></h4>
+  <h4><%= "#{@user.name} has not submitted any posts yet." %></h4>
 <% end %>
 
-<% if user_has_any_post(@user) == true %>
-<h2>Comments</h2>
-<%= render @user.comments %>
-<% else %>
-<h4><%= "#{@user.name} has not submitted any comments yet." %></h4>
+<% if user_has_any_favorites?(@user) %>
+  <% @favorites.each { |post| post.title } %>
 <% end %>

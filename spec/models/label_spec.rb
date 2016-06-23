@@ -7,7 +7,7 @@ RSpec.describe Label, type: :model do
   let(:post) { create(:post) }
 
   let(:label) { create(:label) }
-  let(:label2) { create(:label) }
+  let(:label2) { create(:label, name: RandomData.random_word) }
 
 
 
