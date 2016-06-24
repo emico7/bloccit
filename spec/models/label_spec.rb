@@ -35,6 +35,4 @@ RSpec.describe Label, type: :model do
       expect(Label.update_labels(labels)).to eq(labels_as_a)
     end
   end
-
-
 end
