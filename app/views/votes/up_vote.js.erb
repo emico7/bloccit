@@ -1,0 +1,2 @@
+$('.glyphicon glyphicon-chevron-up').html("<%= j (link_to " ", post_up_vote_path(@post), method: :post) %>");
+$('.js-points').html("<%= j (render '@post.points') %>");
