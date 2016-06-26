@@ -22,7 +22,7 @@ RSpec.describe Api::V1::UsersController, type: :controller do
 
     it "POST create returns http unauthenticated" do
       new_user = build(:user)
-      put :create, user: { name: new_user.name, email: new_user.email, password: new_user.password }
+      post :create, user: { name: new_user.name, email: new_user.email, password: new_user.password }
       expect(response).to have_http_status(401)
     end
   end
@@ -50,7 +50,7 @@ RSpec.describe Api::V1::UsersController, type: :controller do
 
     it "POST create returns http forbidden" do
       new_user = build(:user)
-      put :create, user: { name: new_user.name, email: new_user.email, password: new_user.password }
+      post :create, user: { name: new_user.name, email: new_user.email, password: new_user.password }
       expect(response).to have_http_status(403)
     end
   end
@@ -149,7 +149,7 @@ RSpec.describe Api::V1::UsersController, type: :controller do
           expect(response.content_type).to eq 'application/json'
         end
 
-        it "creates a user with the correnct attributes" do
+        it "creates a user with the correct attributes" do
           hashed_json = JSON.parse(response.body)
           expect(hashed_json["name"]).to eq(@new_user.name)
           expect(hashed_json["email"]).to eq(@new_user.email)
@@ -159,7 +159,7 @@ RSpec.describe Api::V1::UsersController, type: :controller do
 
       context "with invalid attributes" do
         before do
-          put :create, user: { name: "", email: "bademail@", password: "short" }
+          post :create, user: { name: "", email: "bademail@", password: "short" }
         end
 
         it "returns http error" do
