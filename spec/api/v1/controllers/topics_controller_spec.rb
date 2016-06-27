@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'active_record/errors'
 
 RSpec.describe Api::V1::TopicsController, type: :controller do
   let(:my_user) { create(:user) }
@@ -71,21 +72,59 @@ RSpec.describe Api::V1::TopicsController, type: :controller do
       @new_topic = build(:topic)
     end
 
-    describe "PUT update" do
-      before { put :update, id: my_topic.id, topic: {name: @new_topic.name, description: @new_topic.description} }
+      describe "PUT update" do
+        before { put :update, id: my_topic.id, topic: {name: @new_topic.name, description: @new_topic.description} }
 
-      it "returns http success" do
-        expect(response).to have_http_status(:success)
+        it "returns http success" do
+          expect(response).to have_http_status(:success)
+        end
+
+        it "returns json content type" do
+          expect(response.content_type).to eq 'application/json'
+        end
+
+        it "updates a topic with the correct attributes" do
+          updated_topic = Topic.find(my_topic.id)
+          expect(response.body).to eq(updated_topic.to_json)
+        end
       end
 
-      it "returns json content type" do
-        expect(response.content_type).to eq 'application/json'
+      describe "POST create" do
+        before { post :create, topic: {name: @new_topic.name, description: @new_topic.description} }
+
+        it "returns http success" do
+          expect(response).to have_http_status(:success)
+        end
+
+        it "returns json content type" do
+          expect(response.content_type).to eq 'application/json'
+        end
+
+        it "creates a topic with the correct attributes" do
+          hashed_json = JSON.parse(response.body)
+          expect(hashed_json["name"]).to eq(@new_topic.name)
+          expect(hashed_json["description"]).to eq(@new_topic.description)
+        end
       end
 
-      it "updates a topic with the correct attributes" do
-        updated_topic = Topic.find(my_topic.id)
-        expect(response.body).to eq(updated_topic.to_json)
+      describe "DELETE destroy" do
+        before { delete :destroy, id: my_topic.id }
+
+        it "returns http success" do
+          expect(response).to have_http_status(:success)
+        end
+
+        it "returns json content type" do
+          expect(response.content_type).to eq 'application/json'
+        end
+
+        it "returns the correct json success message" do
+          expect(response.body).to eq({ message: "Topic destroyed", status: 200 }.to_json)
+        end
+
+        it "deletes my_topic" do
+          expect{ Topic.find(my_topic.id) }.to raise_exception(ActiveRecord::RecordNotfound)
+        end
       end
     end
   end
-end
