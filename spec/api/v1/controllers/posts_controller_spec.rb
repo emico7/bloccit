@@ -68,7 +68,7 @@ RSpec.describe Api::V1::PostsController, type: :controller do
     before do
       my_user.admin!
       controller.request.env['HTTP_AUTHORIZATION'] = ActionController::HttpAuthentication::Token.encode_credentials(my_user.auth_token)
-      @new_post = build(:post)
+      @new_post = build(:post, topic: my_topic, user: my_user)
     end
 
     describe "PUT update" do
