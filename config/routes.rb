@@ -13,7 +13,6 @@ Rails.application.routes.draw do
     post '/down-vote' => 'votes#down_vote', as: :down_vote
   end
 
-
   resources :users, only: [:new, :create, :show]
 
   resources :sessions, only: [:new, :create, :destroy]
@@ -24,6 +23,7 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
+
       resources :users, only: [:index, :show]
 
       resources :topics, only: [:index, :show] do
