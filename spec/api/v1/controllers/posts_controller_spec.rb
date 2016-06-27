@@ -15,6 +15,18 @@ RSpec.describe Api::V1::PostsController, type: :controller do
       get :show, topic_id: my_topic.id, id: my_post.id
       expect(response).to have_http_status(:success)
     end
+
+    it "PUT update returns http unauthenticated" do
+      new_post = build(:post)
+      put :update, topic_id: my_topic.id, id: my_post.id, post: { title: new_post.title, body: new_post.body }
+      expect(response).to have_http_status(401)
+    end
+
+    it "POST create returns http unauthenticated" do
+      new_user = build(:post)
+      post :create, post: { title: new_post.title, body: new_post.body }
+      expect(response).to have_http_status(401)
+    end
   end
 
 
