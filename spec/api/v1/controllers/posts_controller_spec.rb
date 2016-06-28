@@ -109,7 +109,7 @@ RSpec.describe Api::V1::PostsController, type: :controller do
     describe "DELETE destroy" do
        before { delete :destroy, topic_id: my_topic.id, id: my_post.id }
 
- # #18
+ 
        it "returns http success" do
          expect(response).to have_http_status(:success)
        end
@@ -123,10 +123,9 @@ RSpec.describe Api::V1::PostsController, type: :controller do
        end
 
        it "deletes my_post" do
- # #19
+
          expect{ Post.find(my_post.id) }.to raise_exception(ActiveRecord::RecordNotFound)
        end
      end
-
   end
 end
